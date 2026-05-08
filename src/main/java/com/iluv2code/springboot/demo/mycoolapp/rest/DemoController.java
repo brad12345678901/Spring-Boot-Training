@@ -12,9 +12,9 @@ public class DemoController {
     private Coach myCoach;
 
     @Autowired
-    public DemoController (Coach theCoach) {
-        this.myCoach = theCoach;
-    }
+    public void setCoach(Coach theCoach){
+        myCoach = theCoach;
+    };
 
     @GetMapping("/dailyworkout")
     public String getDailyWorkout() {
