@@ -1,4 +1,4 @@
-package com.iluv2code.springboot.demo.mycoolapp;
+package com.iluv2code.springboot.demo.mycoolapp.common;
 
 import org.springframework.stereotype.Component;
 
