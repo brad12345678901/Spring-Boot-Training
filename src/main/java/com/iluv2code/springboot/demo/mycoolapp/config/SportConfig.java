@@ -1,0 +1,14 @@
+package com.iluv2code.springboot.demo.mycoolapp.config;
+
+import com.iluv2code.springboot.demo.mycoolapp.common.Coach;
+import com.iluv2code.springboot.demo.mycoolapp.common.SwimCoach;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class SportConfig {
+    @Bean
+    public Coach swimCoach () {
+        return new SwimCoach();
+    }
+}
