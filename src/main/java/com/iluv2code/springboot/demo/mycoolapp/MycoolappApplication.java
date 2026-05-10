@@ -19,8 +19,26 @@ public class MycoolappApplication {
 		return runner -> {
 			// createStudent(studentDAO);
 
-			createMultipleStudents(studentDAO);
+//			createMultipleStudents(studentDAO);
+			readStudent(studentDAO);
 		};
+	}
+
+	private void readStudent(StudentDAO studentDAO) {
+		//create a student object
+		System.out.println("Creating a student object... ");
+		Student tempstudent = new Student("Daffy", "Duck", "daffy@iluv2code.com");
+		//save the student
+		System.out.println("Save student Object");
+		studentDAO.save(tempstudent);
+		//display id of the saved student
+		int studentID = tempstudent.getId();
+		System.out.println("Saved Student. Generated ID: "+studentID);
+		//retrieve student based on the id: primary key
+		System.out.println("Retrieve student with id: "+studentID);
+		Student myStudent = studentDAO.findById(studentID);
+		//display student
+		System.out.println("Found the student: "+myStudent);
 	}
 
 	private void createMultipleStudents(StudentDAO studentDAO) {
