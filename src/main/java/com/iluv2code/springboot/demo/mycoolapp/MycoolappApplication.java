@@ -25,8 +25,15 @@ public class MycoolappApplication {
 //			readStudent(studentDAO);
 //			queryForStudents(studentDAO);
 //			queryForStudentsByLastName(studentDAO);
-			updateStudent(studentDAO);
+//			updateStudent(studentDAO);
+			deleteStudent(studentDAO);
 		};
+	}
+
+	private void deleteStudent(StudentDAO studentDAO) {
+		int studentID = 3;
+		System.out.println("Deleting student id: "+ studentID);
+		studentDAO.delete(studentID);
 	}
 
 	private void updateStudent(StudentDAO studentDAO) {
@@ -34,14 +41,17 @@ public class MycoolappApplication {
 		// retrieved student based on primary key id
 		int studentId = 1;
 		System.out.println("Getting Student ID: "+ studentId);
+		Student myStudent = studentDAO.findById(studentId);
 
 		// change first name to Scooby
 		System.out.println("Updating Student... ");
+		myStudent.setFirstName("John");
 
 		// update the student
-		studentDAO.update(studentId, "Scooby");
+		studentDAO.update(myStudent);
 
 		// display the updated student
+		System.out.println("Updated Student: "+myStudent);
 	}
 
 	private void queryForStudentsByLastName(StudentDAO studentDAO) {
