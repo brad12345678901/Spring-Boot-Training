@@ -52,7 +52,13 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     @Transactional
-    public void update(Student theStudent) {
-        entityManager.merge(theStudent);
+    public void update(int StudentID, String firstNameData) {
+        int RowsAffected = entityManager
+                .createQuery("UPDATE Student s SET s.firstName=:thedata WHERE s.id=:studentID")
+                .setParameter("thedata", firstNameData)
+                .setParameter("studentID", StudentID)
+                .executeUpdate();
+
+        System.out.println("Update Student Rows: "+ RowsAffected);
     }
 }

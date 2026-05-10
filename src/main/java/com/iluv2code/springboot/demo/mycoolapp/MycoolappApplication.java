@@ -34,17 +34,14 @@ public class MycoolappApplication {
 		// retrieved student based on primary key id
 		int studentId = 1;
 		System.out.println("Getting Student ID: "+ studentId);
-		Student myStudent = studentDAO.findById(studentId);
 
 		// change first name to Scooby
 		System.out.println("Updating Student... ");
-		myStudent.setFirstName("John");
 
 		// update the student
-		studentDAO.update(myStudent);
+		studentDAO.update(studentId, "Scooby");
 
 		// display the updated student
-		System.out.println("Updated Student: "+myStudent);
 	}
 
 	private void queryForStudentsByLastName(StudentDAO studentDAO) {
