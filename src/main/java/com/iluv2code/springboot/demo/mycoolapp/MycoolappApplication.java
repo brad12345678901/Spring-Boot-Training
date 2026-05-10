@@ -38,7 +38,7 @@ public class MycoolappApplication {
 
 		// change first name to Scooby
 		System.out.println("Updating Student... ");
-		myStudent.setFirstName("Scooby");
+		myStudent.setFirstName("John");
 
 		// update the student
 		studentDAO.update(myStudent);
