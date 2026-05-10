@@ -17,8 +17,23 @@ public class MycoolappApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 		return runner -> {
-			createStudent(studentDAO);
+			// createStudent(studentDAO);
+
+			createMultipleStudents(studentDAO);
 		};
+	}
+
+	private void createMultipleStudents(StudentDAO studentDAO) {
+		// create the student object
+		System.out.println("Creating a student object... ");
+		Student tempstudent1 = new Student("John", "Doe", "john@iluv2code.com");
+		Student tempstudent2 = new Student("Mary", "Public", "maryu@iluv2code.com");
+		Student tempstudent3 = new Student("Benita", "Applebum", "benita@iluv2code.com");
+		// save the student object
+		System.out.println("Saving student... ");
+		studentDAO.save(tempstudent1);
+		studentDAO.save(tempstudent2);
+		studentDAO.save(tempstudent3);
 	}
 
 	private void createStudent(StudentDAO studentDAO) {
