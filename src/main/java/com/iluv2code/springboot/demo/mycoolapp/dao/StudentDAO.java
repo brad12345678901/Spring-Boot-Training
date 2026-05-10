@@ -1,4 +1,4 @@
-package com.iluv2code.springboot.demo.dao;
+package com.iluv2code.springboot.demo.mycoolapp.dao;
 
 import com.iluv2code.springboot.demo.mycoolapp.entity.Student;
 
