@@ -35,6 +35,11 @@ public class StudentRestController {
     public StudentJackson getStudent(@PathVariable int studentID) {
         // jsut index in the list... keep it simple for now
 
+        // check the StudentID again
+        if ((studentID >= theStudents.size()) || (studentID < 0)) {
+            throw new StudentNotFoundException("Student id not found - "+studentID);
+        }
+
         return theStudents.get(studentID);
     }
 }
