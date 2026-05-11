@@ -28,13 +28,8 @@ public class StudentRestController {
         return theStudents;
     }
 
-    // define endpoint for "/students/{studentID}" - return student at index
-
     @GetMapping("/students/{studentID}")
     public StudentJackson getStudent(@PathVariable int studentID) {
-        // jsut index in the list... keep it simple for now
-
-        // check the StudentID again
         if ((studentID >= theStudents.size()) || (studentID < 0)) {
             throw new StudentNotFoundException("Student id not found - "+studentID);
         }
@@ -42,18 +37,24 @@ public class StudentRestController {
         return theStudents.get(studentID);
     }
 
-    // Add an exception Handler using @ExceptionHandler
 
     @ExceptionHandler
     public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException exc) {
-        // create a StudentErrorResponse
-
         StudentErrorResponse error = new StudentErrorResponse();
-
         error.setStatus(HttpStatus.NOT_FOUND.value());
         error.setMessage(exc.getMessage());
         error.setTimestamp(System.currentTimeMillis());
-        // return ErrorResponse
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    // add another handler ... to catch any exception (catch all)
+    @ExceptionHandler
+    public ResponseEntity<StudentErrorResponse> handleException(Exception exc) {
+        StudentErrorResponse error = new StudentErrorResponse();
+
+        error.setStatus(HttpStatus.BAD_REQUEST.value());
+        error.setMessage(exc.getMessage());
+        error.setTimestamp(System.currentTimeMillis());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 }
