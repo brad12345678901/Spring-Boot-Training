@@ -2,10 +2,9 @@ package com.iluv2code.springboot.demo.mycoolapp.rest;
 
 import com.iluv2code.springboot.demo.mycoolapp.entity.StudentJackson;
 import jakarta.annotation.PostConstruct;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,5 +40,20 @@ public class StudentRestController {
         }
 
         return theStudents.get(studentID);
+    }
+
+    // Add an exception Handler using @ExceptionHandler
+
+    @ExceptionHandler
+    public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException exc) {
+        // create a StudentErrorResponse
+
+        StudentErrorResponse error = new StudentErrorResponse();
+
+        error.setStatus(HttpStatus.NOT_FOUND.value());
+        error.setMessage(exc.getMessage());
+        error.setTimestamp(System.currentTimeMillis());
+        // return ErrorResponse
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 }
