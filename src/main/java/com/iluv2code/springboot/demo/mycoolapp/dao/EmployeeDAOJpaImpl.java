@@ -36,11 +36,16 @@ public class EmployeeDAOJpaImpl implements EmployeeDAO {
 
     @Override
     public Employee save(Employee theEmployee) {
-        return null;
+        // save employee
+        Employee dbEmployee = entityManager.merge(theEmployee);
+        // return the dbEmployee
+        return dbEmployee;
     }
 
     @Override
     public void deleteById(int theId) {
+        // find employee by id
 
+        // remove employee
     }
 }
