@@ -4,10 +4,7 @@ import com.iluv2code.springboot.demo.mycoolapp.dao.EmployeeDAO;
 import com.iluv2code.springboot.demo.mycoolapp.entity.Employee;
 import com.iluv2code.springboot.demo.mycoolapp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,7 +12,6 @@ import java.util.List;
 @RequestMapping("/api")
 public class EmployeeRestController {
 
-    // quick and dirty: inject employee DAO
     private EmployeeService employeeService;
 
     @Autowired
@@ -23,14 +19,12 @@ public class EmployeeRestController {
         this.employeeService = employeeService;
     }
 
-    // expose "/employees" and returns a list of employees
 
     @GetMapping("/employees")
     public List<Employee> findAll() {
         return employeeService.findAll();
     }
 
-    // add mapping for GET "/employees/{employeezid}"
     @GetMapping("/employees/{employeeId}")
     public Employee getEmployee(@PathVariable int employeeId) {
         Employee theEmployee = employeeService.findById(employeeId);
@@ -39,5 +33,17 @@ public class EmployeeRestController {
             throw new RuntimeException("Employee ID not found - "+employeeId);
 
         return theEmployee;
+    }
+
+    // add employees for POST "/employees" - add new employee
+    @PostMapping("/employees")
+    public Employee addEmployee(@RequestBody Employee theEmployee) {
+        // also just in case they pass an id in JSON ... set id to 0
+        // this is to force a save of new item ... instead of update
+
+        theEmployee.setId(0);
+        Employee dbEmployee = employeeService.save(theEmployee);
+
+        return dbEmployee;
     }
 }
