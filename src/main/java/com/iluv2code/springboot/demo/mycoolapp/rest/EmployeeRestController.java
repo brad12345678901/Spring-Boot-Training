@@ -1,6 +1,5 @@
 package com.iluv2code.springboot.demo.mycoolapp.rest;
 
-import com.iluv2code.springboot.demo.mycoolapp.dao.EmployeeDAO;
 import com.iluv2code.springboot.demo.mycoolapp.entity.Employee;
 import com.iluv2code.springboot.demo.mycoolapp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
