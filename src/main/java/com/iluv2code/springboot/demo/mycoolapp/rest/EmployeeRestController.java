@@ -56,18 +56,15 @@ public class EmployeeRestController {
         return dbEmployee;
     }
 
-    // add mapping for PATCH
     @PatchMapping("/employees/{employeeId}")
     public Employee patchEmployee(@PathVariable int employeeId, @RequestBody Map<String, Object> patchPayload) {
         Employee tempEmployee = employeeService.findById(employeeId);
 
-        // throw exception if null
 
         if (tempEmployee == null) {
             throw new RuntimeException("Employee id not found - "+employeeId);
         }
 
-        // throw exception if request body has an id
         if (patchPayload.containsKey("id")) {
             throw new RuntimeException("Employee id is not allowed in request body - "+employeeId);
         }
@@ -77,5 +74,21 @@ public class EmployeeRestController {
         Employee dbEmployee = employeeService.save(patchedEmployee);
 
         return dbEmployee;
+    }
+
+    // add mapping for Delete "/employees/{employeeId}" - delete employee
+    @DeleteMapping("/employees/{employeeId}")
+    public String deleteEmployee(@PathVariable int employeeId) {
+        Employee theEmployee = employeeService.findById(employeeId);
+
+        // throw exception if null
+        if (theEmployee == null) {
+            throw new RuntimeException("Employee id not found - " + employeeId);
+        }
+
+        employeeService.deleteById(employeeId);
+
+        return "Deleted employee id - "+employeeId;
+
     }
 }
