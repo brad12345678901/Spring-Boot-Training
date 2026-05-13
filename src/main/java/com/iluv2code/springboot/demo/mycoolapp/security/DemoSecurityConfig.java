@@ -25,6 +25,12 @@ public class DemoSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
+        // Go to PostMan
+        // Type in These endpoints
+        // Select Basic Auth under Authorization tab
+        // Put the User Data
+        // Check if endpoints follow the role restrictions added
+
         http.authorizeHttpRequests(
                 configurer ->
                         configurer
@@ -34,11 +40,8 @@ public class DemoSecurityConfig {
                                 .requestMatchers(HttpMethod.PUT, "/api/employees").hasRole("MANAGER")
                                 .requestMatchers(HttpMethod.DELETE, "/api/employees").hasRole("ADMIN")
         );
-        // use http basic authentication
         http.httpBasic(Customizer.withDefaults());
 
-        // disable CSRF
-        // in general, not required for stateless REST API that use POST PUT DELETE and or PATCH
         http.csrf(csrf -> csrf.disable());
 
         return http.build();
