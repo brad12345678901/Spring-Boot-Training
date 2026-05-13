@@ -25,12 +25,6 @@ public class DemoSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        // Go to PostMan
-        // Type in These endpoints
-        // Select Basic Auth under Authorization tab
-        // Put the User Data
-        // Check if endpoints follow the role restrictions added
-
         http.authorizeHttpRequests(
                 configurer ->
                         configurer
@@ -38,7 +32,7 @@ public class DemoSecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/api/employees/{employeeId}").hasRole("EMPLOYEE")
                                 .requestMatchers(HttpMethod.POST, "/api/employees").hasRole("MANAGER")
                                 .requestMatchers(HttpMethod.PUT, "/api/employees").hasRole("MANAGER")
-                                .requestMatchers(HttpMethod.DELETE, "/api/employees").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/api/employees/{employeeId}").hasRole("ADMIN")
         );
         http.httpBasic(Customizer.withDefaults());
 
