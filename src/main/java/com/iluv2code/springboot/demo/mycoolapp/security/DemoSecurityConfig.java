@@ -29,10 +29,11 @@ public class DemoSecurityConfig {
                 configurer ->
                         configurer
                                 .requestMatchers(HttpMethod.GET, "/api/employees").hasRole("EMPLOYEE")
-                                .requestMatchers(HttpMethod.GET, "/api/employees/{employeeId}").hasRole("EMPLOYEE")
+                                .requestMatchers(HttpMethod.GET, "/api/employees/**").hasRole("EMPLOYEE")
                                 .requestMatchers(HttpMethod.POST, "/api/employees").hasRole("MANAGER")
                                 .requestMatchers(HttpMethod.PUT, "/api/employees").hasRole("MANAGER")
-                                .requestMatchers(HttpMethod.DELETE, "/api/employees/{employeeId}").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.PATCH, "/api/employees/**").hasRole("MANAGER")
+                                .requestMatchers(HttpMethod.DELETE, "/api/employees/**").hasRole("ADMIN")
         );
         http.httpBasic(Customizer.withDefaults());
 
